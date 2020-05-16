@@ -44,7 +44,7 @@ require 'header.php';
 <div><h1>Create non-recurring activity</h1></div>
 <div><p>You can create an one-off activity now and see if the activity mode and your new hobby-buddies suit you!</p><br /></div>
   <form action="includes/nonrecurring_created.php" method="POST">
-    <p>Name: <input type="text" name="activityName" placeholder="Name of the activity"></p>
+    <p>Name: <input type="text" name="activityName" placeholder="Name of the activity" required></p>
     <p>Select Date: <input type="text" id="datepicker" name="date" placeholder="2020-01-01"></p>
     <div class="time"><p>Select Time: <input type="text" id="timepicker" name="time" placeholder="00:00:00"></p></div>
     

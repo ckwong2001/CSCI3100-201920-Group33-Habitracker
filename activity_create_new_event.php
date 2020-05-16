@@ -48,7 +48,7 @@
   <p style="font-weight:normal;">A recurring activity happens once, twice or even more times per week. This can make you stick to an activity and form a new habit</p>
   <form action="includes/recurring_created.php" method="POST">
     <h3>Basic information of the activity</h3>
-    <p>Name: <input type="text" name="activityName" placeholder="Name of the activity"></p>
+    <p>Name: <input type="text" name="activityName" placeholder="Name of the activity" required></p>
     <div class="widget">
 
 
