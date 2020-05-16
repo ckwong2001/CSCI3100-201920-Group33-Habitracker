@@ -11,6 +11,7 @@ function deleteActivity($conn, $activity_id){
 
 
   $stmt1 = mysqli_prepare($conn,$sql1);
+  //finding the activity from the table
 
 
   if ($stmt1 == FALSE) {
@@ -23,6 +24,7 @@ function deleteActivity($conn, $activity_id){
 
     $sql2 = "delete from activity_users_list where activity_id = ? ;";
     $stmt2 = mysqli_prepare($conn,$sql2);
+    //finding the activity id from the user list table
 
     if ($stmt2 == FALSE) {
       header("Location: index.php?error=sqlerror2");
@@ -31,8 +33,10 @@ function deleteActivity($conn, $activity_id){
     else {
       mysqli_stmt_bind_param($stmt2, "i", $activity_id);
       mysqli_stmt_execute($stmt2);
+      //perform deletion
 
       header('Location: activity_view_mine.php?delete=success');
+      //report success
 
     }
   }
