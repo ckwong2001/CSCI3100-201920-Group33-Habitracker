@@ -26,7 +26,7 @@
             if ($search_result_2->num_rows >0) {
                 $row_2 = $search_result_2->fetch_assoc();
                 $score = $row_2['score'];
-                if ($streak>1 && $streak<5) {
+                if ($streak>=1 && $streak<5) {
                     $score = $score + $streak*100;
                     $sql = "Update login set score = '$score' where username = '$username'";
                     $sql = $conn->query($sql);
