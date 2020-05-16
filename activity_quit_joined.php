@@ -55,9 +55,11 @@
         elseif ($capWeekDay=="SAT")return "Saturday";
         elseif ($capWeekDay=="SUN")return "Sunday";
     }
+      //this function is to return the correct string name from the input from POST method
     
     $publicMarker  = -1;
     $activityID = -1;
+      //this minus one allow the system to debug and catch error
     
     
     if(isset($_GET['id'])){
@@ -82,7 +84,6 @@
     if(!empty($row['activity_one_off_datetime'])){
         $date= $row['activity_one_off_datetime'];
         echo "<div></br>Date and time: ".$date."</div>";
-        //echo "<div><label for='date'>Activity Date:</label> <input type='text' id='date' value='.$date.'> </div>";
     }
     if($row['activity_repetition']==1){
         
@@ -125,6 +126,7 @@
 <?php
     $sql_2 = "SELECT * FROM activity_users_list WHERE activity_id = ".$row['activity_id']." ";
     $result_2 = mysqli_query($conn,$sql_2);
+              //this is to retrieve the member list
     if ($result_2->num_rows > 0) {
         echo '<ul>';
         while($row_2 = mysqli_fetch_assoc($result_2)){
