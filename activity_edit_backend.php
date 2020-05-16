@@ -1,5 +1,5 @@
 <?php
-//Contributed by Ivan
+
 
 session_start();
 if(isset($_POST['submitEdit'])){
@@ -15,10 +15,11 @@ if(isset($_POST['submitEdit'])){
   else $activity_status_open = 0;
   $activityID = mysqli_real_escape_string($conn, $_POST['activityID']);
 
-
+//using post method to retrieve information from activity_edit.php
 
   if(empty($activity_name)||empty($activityID)){
     header("Location: ../activity_view_mine.php?edit=errorEmptyFields");
+    //reporting error
   }else{
 
 
@@ -45,6 +46,7 @@ if(isset($_POST['submitEdit'])){
       mysqli_stmt_execute($stmt);
 
       header("Location: activity_view_mine.php?edit=done&id=$activityID");
+      //reporting success and directing user back to main page
     }
   }
 
