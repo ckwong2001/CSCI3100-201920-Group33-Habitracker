@@ -53,12 +53,14 @@
         exit();
     }
     
+    //retrieve all goals created by this user
     require 'db_key.php';
     $conn = connect_db();
     $username = $_SESSION['username'];
     $sql = "Select * from goals Where username = '$username'";
     $search_result = $conn->query($sql);
     
+    //echo feedback messages
     if (isset($_GET['create_goal'])){
         echo '<p>Goal created.</p>';
     };
@@ -72,9 +74,9 @@
     };
     
     ?>
-
+    
 <div><h1 align=center>My Goals List</h1></div>
-
+//create the table if there is results
 <?php
     if ($search_result->num_rows >0) {
         ?>
@@ -94,7 +96,7 @@
         </tr>
     </head>
     <tbody>
-
+//display the information of each goal
         <?php while($row = $search_result->fetch_assoc()) { ?>
         <tr>
         <td><? echo $row['goal_id']; ?></td>
