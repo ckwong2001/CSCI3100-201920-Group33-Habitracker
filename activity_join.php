@@ -20,7 +20,7 @@ function getActivityNameFromActivityID($data){
   while($row = mysqli_fetch_assoc($result)){
     echo "<span>".$row['activity_name']."</span><br>";
   }
-
+//this is function to retrieve the activity name by its unique ID in SQL DB
 
 }
 
@@ -35,6 +35,7 @@ if(isset($_GET['id'])){
   $result = mysqli_query($conn,$sql);
 
   $alreadyJoined = 0;
+  //if the user already joined it, he cannot join it again
 
   while($row = mysqli_fetch_assoc($result)){
     if($row['username'] == $userName){
