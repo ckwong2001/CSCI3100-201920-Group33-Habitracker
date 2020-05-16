@@ -1,5 +1,7 @@
 <?php
     require "header.php";
+    
+    //echo feedback message
     if (isset($_GET['goal_reported'])){
         echo '<p>Goal reported.</p>';
     };
@@ -16,6 +18,7 @@
     </style>
 </head>
 
+//to display the content in a box
 <body>
 <div class="loginbox">
 <?php
@@ -28,6 +31,7 @@
 <div>
 <div><h1>Search goals</h1></div>
 </div>
+//for choosing the preferences in the search
 <form action = 'search_goal_result.php' method = 'POST'>
     <label>You can search goals of other users through keywords.</label><br><br>
     <label>Keyword: <br></label>

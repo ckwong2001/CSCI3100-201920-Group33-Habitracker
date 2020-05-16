@@ -1,16 +1,20 @@
+//header of page and check authorized user
 <?php
     require 'header.php';
     if( !isset( $_SESSION['username']) ){
         echo "You are not authorized to view this page. Go back <a href= '/'>home</a>";
         exit();
-    }
-    
+    } 
     ?>
+
+//display of the info in the box
 <body>
 <div class = 'container'>
 <div>
 <div><h1>Welcome to the activity creation page, <?php echo $_SESSION['username'] ?>!</h1></div>
 </div>
+    
+//content of the form for creating goal
 <form action = 'activity_backend.php' method = 'POST'>
 <div class = 'p-5 m-5'>
 <div class="form-group">

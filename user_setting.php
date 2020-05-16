@@ -20,10 +20,12 @@
         exit();
     }
     
+    //echo feedback message
     if (isset($_GET['edit_setting'])){
         echo '<p>Settings saved.</p>';
     };
     
+    ///retrieve preference of this user
     $user_id = $_SESSION['user_id'];
     require 'db_key.php';
     $conn = connect_db();
@@ -33,13 +35,13 @@
 ?>
 
 <div class="loginbox">
-
+//to place the content of the form in a box
 <div><h1>Settings</h1></div>
 <div><h2>Personalize services according to your needs</h2></div>
 <form action = 'user_setting_backend.php' method = 'POST'>
 <div class = 'p-5 m-5'>
 <div class="form-group">
-
+//the indication of whether to receive emails
 
 <input type="checkbox" name="receive_dailyreminder" <? echo ($row['receive_dailyreminder']? "checked":""); ?>
 <label class ="switch" for="receive_dailyreminder">Receive goal reminder daily via email</label><br><br>

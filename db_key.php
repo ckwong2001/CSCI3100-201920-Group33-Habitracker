@@ -3,6 +3,8 @@
     $sql_username="root";
     $sql_password='';
     $sql_database="Habitracker";
+
+    //to connect to the mySQL database
     function connect_db() {
         global $sql_host, $sql_username, $sql_password, $sql_database;
         $conn=new mysqli($sql_host,$sql_username,$sql_password);

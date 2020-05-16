@@ -63,6 +63,7 @@
     require 'db_key.php';
     $conn = connect_db();
     $username = $_SESSION['username'];
+    //retrieve information of the users in descending order according to score
     $sql = "SELECT * FROM login ORDER BY score DESC";
     $search_result = $conn->query($sql);
     
@@ -70,11 +71,11 @@
 
 
 <div><h1 align=center>Leaderboard</h1></div>
-
+//set up the table if there is results
 <?php
     if ($search_result->num_rows >0) {
         $rank = 0;
-        $same = 0;
+        $same = 0; //to store number of consecutive users having the same score
         $score = 0;
         $found = 0;
         ?>
@@ -88,23 +89,28 @@
     </thead>
 
     <tbody>
+//display the results user by user
 <?php
     while($row = $search_result->fetch_assoc()) {
         if (($rank+$same < 10)||($found==0)) {
+            //we need more entries to display or we have not found the rank of this user
             if (($score != $row['score']) || ($rank==0)) {
+                //if different score as the previous user
                 $rank = $rank + $same + 1;
                 $same = 0;
             } else {
+                //if same score as the previous user
                 $same = $same + 1;
             }
             $score = $row['score'];
+            //find the rank of this user
             if ($row['user_id']==$_SESSION['user_id']) {
                 $user_rank = $rank;
                 $user_score = $row['score'];
                 $found = 1;
             }
     ?>
-
+//display the details of each of the top 10 users
 <tr>
 <td><?php echo $rank; ?></td>
 <td><?php echo $row['username']; ?></td>
@@ -122,7 +128,7 @@
 <?php
     }
     ?>
-
+//display the rank of this user
 <div><h1 align=center>My Ranking</h1></div>
 
 <table class="content-table">
