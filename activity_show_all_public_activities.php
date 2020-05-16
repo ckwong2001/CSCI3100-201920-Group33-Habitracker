@@ -156,6 +156,7 @@
     }
     
     if( !isset( $_SESSION['username']) ){
+        //this is to catch error the the user is not logged in yet
         echo "You are not authorized to view this page. Go back <a href= '/'>home</a>";
         exit();
     }
@@ -252,6 +253,7 @@
     
 <?php 
     if ($row['username'] == $_SESSION['username']) {
+        //this is ensure the creator himself cannot report his own activtity
         echo '<td>-</td>';
     }
     else {
