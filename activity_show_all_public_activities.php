@@ -1,5 +1,11 @@
 <?php
     require "header.php";
+  //this is the code to show all events public
+  //Contributed by Ivan Lai (1155143433)
+  //this php fits in the search activity of the "Activities" section
+  //this is written on 22 April 2020
+  //this program allows users to look at all  events
+  //the program reads the activity_id with boolean value public set to true and query it in mysql to display all of them
 ?>
 
 <html>
@@ -150,6 +156,7 @@
     }
     
     if( !isset( $_SESSION['username']) ){
+        //this is to catch error the the user is not logged in yet
         echo "You are not authorized to view this page. Go back <a href= '/'>home</a>";
         exit();
     }
@@ -246,6 +253,7 @@
     
 <?php 
     if ($row['username'] == $_SESSION['username']) {
+        //this is ensure the creator himself cannot report his own activtity
         echo '<td>-</td>';
     }
     else {

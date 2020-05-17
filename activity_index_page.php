@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en">
 <?php
+	
+	  //this is the code to  store some important functions of activity modification
+  //Contributed by Ivan Lai (1155143433)
+  //this php fits in the backend operation activity of the "Activities" section
+  //this is written on 21 April 2020
+  //this program allows users to edit specific event
+  //the program reads the activity_id and query it in mysql 
     require 'header.php';
     ?>
 <head>

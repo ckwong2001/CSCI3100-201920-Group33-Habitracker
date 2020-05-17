@@ -3,7 +3,12 @@
 <head>
 
   <?php
-  //Contributed by Ivan
+  //activity_create_new_event is the code to create new event
+  //Contributed by Ivan Lai (1155143433)
+  //this php fits in the create activity of the "Activities" section
+  //this is written on 22 April 2020
+  //this program allows users to pick time and date and name for activities
+  //the program reads date and some string inputs to desrcibe the event
   require 'header.php';
   ?>
 
@@ -43,7 +48,7 @@
   <p style="font-weight:normal;">A recurring activity happens once, twice or even more times per week. This can make you stick to an activity and form a new habit</p>
   <form action="includes/recurring_created.php" method="POST">
     <h3>Basic information of the activity</h3>
-    <p>Name: <input type="text" name="activityName" placeholder="Name of the activity"></p>
+    <p>Name: <input type="text" name="activityName" placeholder="Name of the activity" required></p>
     <div class="widget">
 
 

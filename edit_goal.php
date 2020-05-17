@@ -18,18 +18,22 @@
     $goal_id = $_GET['goal_id'];
     require 'db_key.php';
     $conn = connect_db();
+    
+    //retrieve information of the corresponding goal
     $sql = "Select * from goals Where goal_id = '$goal_id'";
     $search_result = $conn->query($sql);
     $row = $search_result->fetch_assoc();
     if ($row['username'] == $_SESSION['username']) {
         $_SESSION['goal_id'] = $goal_id;
         ?>
-
+//to place the content displayed in a box
 <div class="loginbox">
 
 <div><h1>Edit goal</h1></div>
 <form action = 'goal_backend.php' method = 'POST'>
 
+    
+//content of the form, with prefill as the previously entered value
 <label>Goal name:</label>
 <input class = 'form-control w-50' type="text" value="<?php echo $row['goal_name']; ?>" name="goal_name" required><br><br>
 

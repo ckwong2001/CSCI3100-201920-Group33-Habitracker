@@ -1,5 +1,11 @@
 
 <?php
+  //this is the code to search event
+  //Contributed by Ivan Lai (1155143433)
+  //this php fits in the search activity of the "Activities" section
+  //this is written on 24 April 2020
+  //this program allows users to search specific event with a specific keyword
+  //the program reads the string keyword from user and perform search function with mysql
     require "header.php";
 ?>
 

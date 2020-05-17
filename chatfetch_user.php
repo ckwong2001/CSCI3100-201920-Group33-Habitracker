@@ -26,12 +26,15 @@ $output = '
  </tr>
 ';
 
+//display the timestamp of a chat message when users view and send text messages
 foreach($result as $row)
 {
  $status = '';
  $current_timestamp = strtotime(date("Y-m-d H:i:s") . '- 10 second');
  $current_timestamp = date('Y-m-d H:i:s', $current_timestamp);
  $user_last_activity = fetch_user_last_activity($row['user_id'], $connect);
+ 
+ //display users' online or offline status before users start a chat with certain user
  if($user_last_activity > $current_timestamp)
  {
   $status = '<span class="label label-success">Online</span>';
@@ -40,6 +43,8 @@ foreach($result as $row)
  {
   $status = '<span class="label label-danger">Offline</span>';
  }
+ 
+ //display number of unseen chat message and typing status on the frontend page of users in the system
  $output .= '
  <tr>
   <td>'.$row['username'].' '.count_unseen_message($row['user_id'], $_SESSION['user_id'], $connect).' '.fetch_is_type_status($row['user_id'], $connect).'</td>

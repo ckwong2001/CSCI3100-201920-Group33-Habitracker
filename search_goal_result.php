@@ -127,8 +127,11 @@ padding: 12px 15px;
     require 'db_key.php';
     $conn = connect_db();
     
+    //to get the filled requirements of the search
     $goal_keyword = $_POST['goal_keyword'];
     $sortby = $_POST['sortby'];
+    
+    //change the filled deatails into proper SQL
     if ($sortby=="Goal ID") $sortby = "goal_id";
     elseif ($sortby=="Goal name") $sortby = "goal_name";
     elseif ($sortby=="End date") $sortby = "goal_enddate";
@@ -138,6 +141,7 @@ padding: 12px 15px;
     if ($order=="Ascending") $order = "ASC";
     elseif ($order=="Descending") $order = "DESC";
     
+    //get all the entries that are set as public and match the keyword
     $sql = "Select * from goals Where goal_name Like '%$goal_keyword%' and goal_public = True Order by $sortby $order";
     $search_result = $conn->query($sql);
     
@@ -145,7 +149,7 @@ padding: 12px 15px;
     $order = $_POST['order'];
     ?>
 
-
+//set up the zone for inputting details of the next searching
 <div><h1 align=center>Search results</h1></div>
 <div class="search-word">
 <h3>Search by keyword</h3>
@@ -178,6 +182,7 @@ padding: 12px 15px;
 <div><p>Order: <?php echo $order; ?></p></div>
 </div>
 
+//set up the table if there is results
 <?php
     if ($search_result->num_rows >0) {
         ?>
@@ -196,6 +201,7 @@ padding: 12px 15px;
 </tr>
 </thead>
 
+//display the details of the goal
 <tbody>
 <?php while($row = $search_result->fetch_assoc()) { ?>
 
@@ -210,6 +216,7 @@ padding: 12px 15px;
 <td><?php echo (($row['goal_starttime'] != NULL)? date("H:i", strtotime($row['goal_starttime'])) : '-'); ?></td>
 <td><?php echo (($row['goal_endtime'] != NULL)? date("H:i", strtotime($row['goal_endtime'])) : '-'); ?></td>
 
+//display the button to report goal if the user if not the creator of the goal
 <?php
     if ($row['username'] == $_SESSION['username']) {
         echo '<td>-</td>';

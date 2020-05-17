@@ -1,5 +1,10 @@
 <?php
-    //Contributed by Ivan
+   //this is the code to display details of an event
+  //Contributed by Ivan Lai (1155143433)
+  //this php fits in the view activity of the "Activities" section
+  //this is written on 21 April 2020
+  //this program allows users to view specific event
+  //the program reads the activity_id and query it in mysql to display the string name, the datetime time and general remarks stored in string format
     require 'header.php';
     $username = $_SESSION['username'];
     $user_id = $_SESSION['user_id'];
@@ -36,7 +41,7 @@
         echo '<div><h1>Activity details</h1></div>';
         
         $activityID = $_GET['id'];
-        
+         //getting the activity id so that we can query it in the table
         $conn = mysqli_connect("localhost","root","","Habitracker");
         $sql = "SELECT * FROM activity_table WHERE activity_id = ".$activityID." ";
         $result = mysqli_query($conn,$sql);
@@ -53,15 +58,17 @@
     if(!empty($row['activity_one_off_datetime'])){
         $date= $row['activity_one_off_datetime'];
         echo "<div></br>Date and time: ".$date."</div>";
-        //echo "<div><label for='date'>Activity Date:</label> <input type='text' id='date' value='.$date.'> </div>";
+        //displaying the date and time
     }
     if($row['activity_repetition']==1){
+       //for once a week
         
         echo "<div><br>The activity will be held once a week on ".
         getProperWeekDay($row['activity_recurring_date_0']).
         " at ".$row['activity_recurring_time_0'].". </div>";
     }
     if($row['activity_repetition']==2){
+       //for twice a week
         
         echo "<div><br>The activity will be held twice a week on ".
         getProperWeekDay($row['activity_recurring_date_0']).
@@ -72,6 +79,7 @@
         " </div>";
     }
     if($row['activity_repetition']==3){
+       //for thrice a week
         
         echo "<div><br>The activity will be held three times a week on ".
         getProperWeekDay($row['activity_recurring_date_0']).
@@ -95,6 +103,7 @@
 
 <?php
     $sql_2 = "SELECT * FROM activity_users_list WHERE activity_id = ".$row['activity_id']." ";
+           //to find the user name to display it in the table, we need to look up the name in the user_list with the corresponding acitivity id
     $result_2 = mysqli_query($conn,$sql_2);
     if ($result_2->num_rows > 0) {
         echo '<ul>';

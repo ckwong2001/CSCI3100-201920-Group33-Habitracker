@@ -8,11 +8,13 @@
     
     require 'db_key.php';
     $conn = connect_db();
+    //to retrieve information about the concerned goal
     $sql = "Select * from goals Where goal_id = '$goal_id'";
     $search_result = $conn->query($sql);
     $row = $search_result->fetch_assoc();
     if ($row['username'] == $_SESSION['username']) {
         $_SESSION['goal_id'] = $goal_id;
+        //to delete the entry from mySQL
         $sql = "Delete from goals Where goal_id = '$goal_id'";
         $sql = $conn->query($sql);
         if($sql){

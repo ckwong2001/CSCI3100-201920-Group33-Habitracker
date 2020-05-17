@@ -1,11 +1,12 @@
 <?php
 
-//database_connection.php
+//to connect the database for the chat function 
 
 $connect = new PDO("mysql:host=localhost;dbname=Habitracker", "root", "");
 
 date_default_timezone_set('Asia/Hong_Kong');
 
+//fetch users' last activity 
 function fetch_user_last_activity($user_id, $connect)
 {
  $query = "
@@ -23,7 +24,8 @@ function fetch_user_last_activity($user_id, $connect)
  }
 }
 
-function fetch_user_chat_history($from_user_id, $to_user_id, $connect) //fetch chat from 2 people
+//fetch chat messages from 2 people in the private chat dialog box and arrange the messages in chronological order
+function fetch_user_chat_history($from_user_id, $to_user_id, $connect) 
 {
  $query = "
  SELECT * FROM chat_message 
@@ -72,6 +74,7 @@ function fetch_user_chat_history($from_user_id, $to_user_id, $connect) //fetch c
             return $output; 
         }
 
+        //fetch username of the user whom one is chating with and for displaying that user's name in the dialog box
         function get_user_name($user_id, $connect)
         {
          $query = "SELECT username FROM login WHERE user_id = '$user_id'";
@@ -84,6 +87,7 @@ function fetch_user_chat_history($from_user_id, $to_user_id, $connect) //fetch c
          }
         }
 
+        //count number of unseen message received from a particular user 
         function count_unseen_message($from_user_id, $to_user_id, $connect)
         {
             $query = "
@@ -103,24 +107,8 @@ function fetch_user_chat_history($from_user_id, $to_user_id, $connect) //fetch c
             return $output;
         }
 
-        function count_activity_unseen_message($activity_id, $connect)
-        {
-            $query = "
-            SELECT * FROM chat_message
-            WHERE activity_id = '$activity_id'
-            AND status = '1'
-            ";
-            $statement = $connect->prepare($query);
-            $statement->execute();
-            $count = $statement->rowCount();
-            $output = '';
-            if($count > 0)
-            {
-                $output = '<span class="label label-success">' .$count. '</span>';
-            }
-            return $output;
-        }
 
+        //for displaying whether the user one is chating with is typing online
         function fetch_is_type_status($user_id, $connect)
         {
             $query ="
@@ -143,52 +131,10 @@ function fetch_user_chat_history($from_user_id, $to_user_id, $connect) //fetch c
             return $output;
         }
 
-        function fetch_group_chat_history($connect)
-        {
-        $query = "
-        SELECT * FROM chat_message 
-        WHERE to_user_id = '0'  
-        ORDER BY timestamp DESC
-        ";
-
-        $statement = $connect->prepare($query);
-
-        $statement->execute();
-
-        $result = $statement->fetchAll();
-
-        $output = '<ul class="list-unstyled">';
-        foreach($result as $row)
-        {
-            $user_name = '';
-            if($row["from_user_id"] == $_SESSION["user_id"])
-            {
-                $user_name = '<b class="text-success">You</b>';
-            }
-            else
-            {
-                $user_name = '<b class="text-danger">'.get_user_name($row['from_user_id'], $connect).'</b>';
-            }
-
-            $output .= '
-
-            <li style="border-bottom:1px dotted #ccc">
-            <p>'.$user_name.' - '.$row['chat_message'].' 
-            <div align="right">
-            - <small><em>'.$row['timestamp'].'</em></small>
-            </div>
-            </p>
-            </li>
-            ';
-        }
-        $output .= '</ul>';
-        return $output;
-}
-
-
-function fetch_activity_chat_history($from_user_id, $activity_id, $connect) //fetch chat from activity, refer to fetch group chat history .php, deleted from userid and change to user id
+//fetch chat history for groupchat system, similar to private chat system
+function fetch_activity_chat_history($from_user_id, $activity_id, $connect) 
 {
-//not sure about the query
+
  $query = "
  SELECT * FROM activity_chat_message 
  WHERE activity_id = '".$activity_id."' 

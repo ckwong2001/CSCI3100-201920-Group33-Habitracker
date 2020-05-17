@@ -2,7 +2,12 @@
 <html lang="en">
 
 <?php
-//Contributed by Ivan
+  //this is the code to create new one off event
+  //Contributed by Ivan Lai (1155143433)
+  //this php fits in the create activity of the "Activities" section
+  //this is written on 22 April 2020
+  //this program allows users to pick time and date and name for activities
+  //the program reads date and some string inputs from users to desrcibe the event
 
 require 'header.php';
 ?>
@@ -15,7 +20,6 @@ require 'header.php';
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link rel="stylesheet" href="activity_create_nonrecurring.css">
-
 
 
   <script>
@@ -40,10 +44,11 @@ require 'header.php';
 <div><h1>Create non-recurring activity</h1></div>
 <div><p>You can create an one-off activity now and see if the activity mode and your new hobby-buddies suit you!</p><br /></div>
   <form action="includes/nonrecurring_created.php" method="POST">
-    <p>Name: <input type="text" name="activityName" placeholder="Name of the activity"></p>
+    <p>Name: <input type="text" name="activityName" placeholder="Name of the activity" required></p>
     <p>Select Date: <input type="text" id="datepicker" name="date" placeholder="2020-01-01"></p>
     <div class="time"><p>Select Time: <input type="text" id="timepicker" name="time" placeholder="00:00:00"></p></div>
-
+    
+    
     <p>Location: 
     <select name="Locationnumber" id="Locationnumber">
         <option>Islands</option>

@@ -1,7 +1,14 @@
 <?php
+  //this is the code to view all the participated event
+  //Contributed by Ivan Lai (1155143433)
+  //this php fits in the view mine activity of the "Activities" section
+  //this is written on 22 April 2020
+  //this program allows users to view specific events
+  //the program reads the user_id and query it in user_activity_table and retrieve all activity_id and query it in mysql to display them
     require 'header.php';
     $user_id = $_SESSION['user_id'];
     $username = $_SESSION['username'];
+
 ?>
 
 <style>

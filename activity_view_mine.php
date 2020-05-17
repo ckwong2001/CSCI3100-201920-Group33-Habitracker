@@ -91,6 +91,7 @@
         while($row = mysqli_fetch_assoc($result)){
             $cnt++;
         }
+        //if the counter is zero, it means the user has not joined so return false
         if($cnt==0){
             return FALSE;
         }else{
@@ -140,7 +141,8 @@
     <tbody>
 <?php
     while($row = $search_result->fetch_assoc()) {
-        if (checkJoined($row['activity_id'],$user_id)==TRUE) {
+        if (checkJoined($row['activity_id'],$user_id)==TRUE) //this implements the function in line 80 to 99
+        {
     ?>
 
 <tr>
@@ -175,6 +177,7 @@
 </table>
 <?php
     } else
+        //this is when the system cannot find any results
     echo "No results";
     ?>
 </body>

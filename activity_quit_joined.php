@@ -1,5 +1,10 @@
 <?php
-    //Contributed by Ivan
+      //this is the code to quit event they have joined
+  //Contributed by Ivan Lai (1155143433)
+  //this php fits in the quit activity of the "Activities" section
+  //this is written on 23 April 2020
+  //this program allows users to quit specific event
+  //the program reads the activity_id and query it in mysql, then delete the specific entry from activity_user_table
     require 'header.php';
     $username = $_SESSION['username'];
     $user_id = $_SESSION['user_id'];
@@ -50,9 +55,11 @@
         elseif ($capWeekDay=="SAT")return "Saturday";
         elseif ($capWeekDay=="SUN")return "Sunday";
     }
+      //this function is to return the correct string name from the input from POST method
     
     $publicMarker  = -1;
     $activityID = -1;
+      //this minus one allow the system to debug and catch error
     
     
     if(isset($_GET['id'])){
@@ -77,7 +84,6 @@
     if(!empty($row['activity_one_off_datetime'])){
         $date= $row['activity_one_off_datetime'];
         echo "<div></br>Date and time: ".$date."</div>";
-        //echo "<div><label for='date'>Activity Date:</label> <input type='text' id='date' value='.$date.'> </div>";
     }
     if($row['activity_repetition']==1){
         
@@ -120,6 +126,7 @@
 <?php
     $sql_2 = "SELECT * FROM activity_users_list WHERE activity_id = ".$row['activity_id']." ";
     $result_2 = mysqli_query($conn,$sql_2);
+              //this is to retrieve the member list
     if ($result_2->num_rows > 0) {
         echo '<ul>';
         while($row_2 = mysqli_fetch_assoc($result_2)){

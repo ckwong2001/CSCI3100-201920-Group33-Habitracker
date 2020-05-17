@@ -79,9 +79,11 @@
     $conn = connect_db();
     $username = $_SESSION['username'];
     $today = date("Y-m-d", time());
+    //retrieve the goals that are still in progress
     $sql = "Select * from goals Where username = '$username' and goal_enddate >= '$today'";
     $search_result = $conn->query($sql);
     
+    //echo feedback message
     if (isset($_GET['update_goal_completion'])){
         echo '<p>Progress today saved.</p>';
     };
@@ -95,6 +97,7 @@
 <?php
     if ($search_result->num_rows >0) {
         ?>
+    //create the table if there is result
     <table class="content-table">
         <thead>
             <tr>
@@ -110,6 +113,7 @@
             </tr>
         </thead>
 
+        //display the goal information
         <tbody>
         <?php while($row = $search_result->fetch_assoc()) { ?>
         <tr>

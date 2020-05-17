@@ -2,6 +2,7 @@
 
 //fetch_user_chat_history.php
 
+//for fetching users' chat history in private chat
 include('chatdatabase_connection.php');
 
 session_start(); //get session variable

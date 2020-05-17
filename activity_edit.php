@@ -1,5 +1,10 @@
 <?php
-    //Contributed by Ivan
+  //this is the code to edit details event
+  //Contributed by Ivan Lai (1155143433)
+  //this php fits in the edit activity of the "Activities" section
+  //this is written on 23 April 2020
+  //this program allows users to edit specific event
+  //the program reads the activity_id and query it in mysql to perform data modification (including change the string name or the datetime date or the string type remarks of the event
     
     require 'header.php';
     ?>
@@ -54,14 +59,12 @@
                     echo "<p><label for='activtyName'>Name:</label> <input type='text' name='activityName' placeholder='Name of the activity' value='$actName'> </p>";
                     
                     
-                    //echo "<div>Details: </div></br>";
                     
                 }
                 
                 if(!empty($row['activity_one_off_datetime'])){
                     $date= $row['activity_one_off_datetime'];
                     echo "<div></br>Date and time: ".$date."</div>";
-                    //echo "<div><label for='date'>Activity Date:</label> <input type='text' id='date' value='.$date.'> </div>";
                 }
                 if($row['activity_repetition']==1){
                     
@@ -104,8 +107,10 @@
                 ';
                 
                 $publicMarker = $row['activity_status_open'];
+              //storing the boolean var into an int
                 
                 if($publicMarker==1){
+                  //this is the option when public is set to true
                     
                     echo '<p></br>Visible by other users?* <select name="publicOption" id="publicOption">
                     <option>no</option>
@@ -116,6 +121,7 @@
                     echo '<p style="font-weight:normal;"></br>If you plan to delete this activity, the activity also has to be closed first.</p>';
                     
                 }elseif($publicMarker==0){
+                  //this is when event is set to private
                     
                     echo '<p><br>Show to public or not? <select name="publicOption" id="publicOption">
                     <option selected="selected">no</option>
@@ -129,6 +135,7 @@
                 
                 
                 if($publicMarker==0)
+                  //only private event can be deleted
                     
                     echo'
                     <form action = "activity_delete.php" method="GET">

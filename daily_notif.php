@@ -18,6 +18,7 @@ foreach($result as $row)
 {
     $username = $row['username'];
     $today = date("Y-m-d", time());
+    //select goals of the user that are not ended
     $query = "SELECT * FROM goals WHERE username = '$username' and goal_enddate >= '$today'";
 
     $statement = $connect->prepare($query);
@@ -25,7 +26,8 @@ foreach($result as $row)
     $statement->execute();
 
     $result_2 = $statement->fetchAll();
-
+    
+    //details of the email
     $to = $row['email'];
     $url = "localhost/habitracker/login.php";
 
