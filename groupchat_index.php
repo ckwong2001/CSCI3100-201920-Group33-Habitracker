@@ -171,7 +171,7 @@ $(document).ready(function(){
   })
  });
 
-/fetch the chat history of a certain activity
+//fetch the chat history of a certain activity
 function fetch_activity_chat_history(activity_id) 
  {
   $.ajax({
