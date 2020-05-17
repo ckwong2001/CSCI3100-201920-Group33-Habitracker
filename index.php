@@ -12,6 +12,7 @@
 
     <main>
         <?php
+        //display login success message when one has logged in the system
         if (isset($_GET['login'])){
             if($_GET['login'] == 'success')
                 echo "<p>You are logged in! </p>";
@@ -20,12 +21,14 @@
                 echo '<p>You can access different functions of Habitracker using links at the header. Explore your journey in Habitracker!</p>';
             }
             else {
+                //display login failed message when one hasn not logged in the system
+                //to prevent people accessing users' information by altering the url
                 echo '<p>You are not logged in! Please log in to use Habitracker.</p>';
             }
         ?>
     </main>
 
-
+   <!--displaying the layout of the index page -->
         <header>
             <div class="content">
                 <div class="kolom">
