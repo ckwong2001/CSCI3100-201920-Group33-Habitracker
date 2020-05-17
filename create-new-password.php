@@ -14,7 +14,7 @@
 </head>
 
 <body>
-
+//for display animation in the frontend page
 <div class="bubbles">
         <div class="bubble"></div>
         <div class="bubble"></div>
@@ -27,6 +27,9 @@
         <div class="bubble"></div>
         <div class="bubble"></div>
     </div>
+
+//allow users to create their new password after being redirected from the email
+//users will receive an email which contain the link to this page if one forgets his password when they attempt to login
     
 <img src="img/logo.png" alt="Habitracker" height="50">
 <div class="loginbox">
