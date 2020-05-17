@@ -1,4 +1,4 @@
-//connect the private chat application with the database 
+<!--connect the private chat application with the database -->
 
 <?php
 
