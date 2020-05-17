@@ -1,3 +1,5 @@
+<!--backend code when user submit a request for resetting one's password when one forgot his password-->
+
 <?php
 
 if (isset($_POST["reset-password-submit"])) {
@@ -9,9 +11,10 @@ if (isset($_POST["reset-password-submit"])) {
 
     if (empty($password) || empty($passwordRepeat)) {
         header("Location: ../create-new-password.php?newpwd=empty&selector=$selector&validator=$validator");
-        //header("Location: ../create-new-password.php?newpwd=empty" . $selector . "&validator=" . bin2hex($token));
+        
         exit(); //this wont work since the tokens aren't included! either include the tokens in the URL, or just send them to the signup page and ask them to start over.
     
+        //check the validity of users' input 
     } else if ($password != $passwordRepeat) {
         header("Location: ../create-new-password.php?newpd=pwdnotsame&selector=$selector&validator=$validator");
         exit();
@@ -21,7 +24,7 @@ if (isset($_POST["reset-password-submit"])) {
     
     require 'dbh.inc.php';
 
-    $sql = "SELECT * FROM pwdreset WHERE pwdResetSelector=? AND pwdResetExpires >= ?;"; // replace the ? by the data input by user (data bind to statement)
+    $sql = "SELECT * FROM pwdreset WHERE pwdResetSelector=? AND pwdResetExpires >= ?;"; 
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)){
         echo "There was an error!";
@@ -31,7 +34,7 @@ if (isset($_POST["reset-password-submit"])) {
         mysqli_stmt_execute($stmt);
 
         $result = mysqli_stmt_get_result($stmt);
-        if (!$row = mysqli_fetch_assoc($result)) {    //insert data into the associated array so we can refer to data by column names
+        if (!$row = mysqli_fetch_assoc($result)) {    
             echo "You need to re-submit your reset request.";
             exit();
         } else {
@@ -45,22 +48,22 @@ if (isset($_POST["reset-password-submit"])) {
             } else if ($tokenCheck === true) {
                 $tokenEmail = $row['pwdResetEmail'];
 
-                //$sql = "SELECT * FROM users WHERE emailUsers=?;";
+                //retrieve users' data from the database 
                 $sql = "SELECT * FROM login WHERE email=?;";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)){
                     echo "There was an error!";
                     exit();
                 } else {
-                    mysqli_stmt_bind_param($stmt, "s", $tokenEmail); //input data into the place holder '?'
+                    mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
                     mysqli_stmt_execute($stmt);
                     $result = mysqli_stmt_get_result($stmt);
-                    if (!$row = mysqli_fetch_assoc($result)) {    //insert data into the associated array so we can refer to data by column names
+                    if (!$row = mysqli_fetch_assoc($result)) {    
                         echo "There was an error!";
                         exit();
                     } else {
 
-                        //$sql = "UPDATE users SET pwdUsers=? WHERE emailUsers=?;"; // update password from user table, matching both emails
+                        //update one's password after validation
                         $sql = "UPDATE login SET password=? WHERE email=?;";
                         $stmt = mysqli_stmt_init($conn);
                         if (!mysqli_stmt_prepare($stmt, $sql)){
@@ -71,12 +74,14 @@ if (isset($_POST["reset-password-submit"])) {
                             mysqli_stmt_bind_param($stmt, "ss", $newPwdHash, $tokenEmail); 
                             mysqli_stmt_execute($stmt);
 
+                            //delete one's request for resetting password to prevent clashing 
                             $sql = "DELETE FROM pwdreset WHERE pwdResetEmail=?;";
                             $stmt = mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmt, $sql)) {
                                 echo "There was an error!";
                                 exit();
                             }
+                            //redirect user to login page to login with their new password 
                             else {
                                 mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
                                 mysqli_stmt_execute($stmt);
