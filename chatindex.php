@@ -10,6 +10,7 @@
         }
     </style>
 
+//display the header in the chat index page which contains a list of users that a user can start chat with
 <body>
 <img src="img/logo.png" alt="Habitracker" height="50">
 
@@ -98,6 +99,10 @@
 
 
 <script>  
+//run the following functions every 5 seconds to achieve real time chating function
+//Thess functions include updating one's last activity for showing one's online and offline status, 
+//fetching one's username and updating chat history for real time chating
+    
 $(document).ready(function(){
 
  fetch_user();
@@ -108,6 +113,7 @@ $(document).ready(function(){
     update_chat_history_data();
  }, 5000);
 
+ //function for fetching one's username and related chat information
  function fetch_user()
  {
   $.ajax({
@@ -119,6 +125,7 @@ $(document).ready(function(){
   })
  }
 
+ //function for updating users' last activity, one's activity start when one logged in the system
  function update_last_activity()
  {
   $.ajax({
@@ -130,6 +137,7 @@ $(document).ready(function(){
   })
  }
 
+ //function for making the chat dialog box for private chat system
  function make_chat_dialog_box(to_user_id, to_user_name)
  {
   var modal_content = '<div id="user_dialog_'+to_user_id+'" class="user_dialog" title="You have chat with '+to_user_name+'">';
@@ -143,6 +151,7 @@ $(document).ready(function(){
   $('#user_model_details').html(modal_content);
  }
 
+ //function for calling the function which create dialog box when one clicks on the start chat button
  $(document).on('click', '.start_chat', function(){
     var to_user_id = $(this).data('touserid');
     var to_user_name = $(this).data('tousername');
@@ -154,6 +163,9 @@ $(document).ready(function(){
     $('#user_dialog_'+to_user_id).dialog('open');
  });
  
+ //function which read one's message and sender
+ //after the chat history is updated, it displays one's chat message and the sender in the dialog box after one clicks the send button
+    
  $(document).on('click', '.send_chat', function(){
   var to_user_id = $(this).attr('id');
   var chat_message = $('#chat_message_'+to_user_id).val(); //fetch data from chat area field and store in this variable
@@ -174,8 +186,8 @@ function fetch_user_chat_history(to_user_id) //fetch particular user chat histor
   $.ajax({
    url:"chatfetch_user_chat_history.php",
    method:"POST",
-   data:{to_user_id:to_user_id}, //choose what variable to send to sever
-   success:function(data){ //can receive chat history from server if success
+   data:{to_user_id:to_user_id},    //choose what variable to send to sever
+   success:function(data){          //can receive chat history from server if success
     $('#chat_history_'+to_user_id).html(data);
    }
   })
@@ -189,10 +201,12 @@ function fetch_user_chat_history(to_user_id) //fetch particular user chat histor
     });
  }
 
+ //function to hide the chat dialog box when one clicks the "cross" button
  $(document).on('click', '.ui-button-icon', function(){
   $('.user_dialog').dialog('destroy').remove();
  });
 
+//function for sensing one's cursor activity in the dialog box for displaying the typing status of a certain user
 $(document).on('focus', '.chat_message', function(){  //execute code if cursor come into text area field
     var is_type = 'yes';
     $.ajax({
@@ -205,7 +219,7 @@ $(document).on('focus', '.chat_message', function(){  //execute code if cursor c
         }
     })
 });
-
+ 
 $(document).on('blur', '.chat_message', function(){  //execute code if cursor come into text area field
     var is_type = 'no';
     $.ajax({
