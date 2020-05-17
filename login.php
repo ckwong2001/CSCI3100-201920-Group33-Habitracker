@@ -13,6 +13,7 @@
     </style>
 </head>
 
+<!-- displaying the animation when one reaches the login page-->
 <body>
     <div class="bubbles">
         <div class="bubble"></div>
@@ -33,6 +34,8 @@
             <h1>Login Here</h1> 
             <?php 
                 session_start();
+        
+      //displaying the interface for user to login if one has not logged in 
                 if (!isset($_SESSION['user_id'])){
                     echo '<form action="includes/login.inc.php" method="post">
                     <p>Username/E-mail</p> 
@@ -45,11 +48,13 @@
                     <a href="admin_login.php">Login as administrator</a>
                     </form>';
                 } else {
+                    
+      //displaying the logout button after users have logged in 
                     echo '<form action="includes/logout.inc.php" method="post">
                     <button type="submit" name="logout-submit">Logout</button></br></br>
                     </form>';
                 }  
-
+       //display error messages when user entered invalid information when they login
                 if (isset($_GET['error'])){  
                     if ($_GET['error'] == "wrongpwd") {
                         echo '<p class="wrong"> Wrong username or password!</p>';
@@ -61,7 +66,10 @@
                         echo '<p class="wrong"> Wrong username or password!</p>';
                     }
                 }
-
+      //display success message after user has successfully create one's new password
+       //users will be redirected back to the login page from the create password page
+        //users create their new password if they have forgot their password 
+        
                 if (isset($_GET["newpwd"])) {
                     if ($_GET["newpwd"] == "passwordupdated") {
                         echo '<p>Your password has been reset!</p>';
