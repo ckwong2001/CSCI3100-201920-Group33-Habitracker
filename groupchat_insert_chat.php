@@ -1,5 +1,6 @@
 <?php
 
+//retrieve chat messages when users open the dialog box to see the chat history of a certain activity
 include ('chatdatabase_connection.php');
 
 session_start();
@@ -11,7 +12,7 @@ $data = array(
     ':status'   => '1'
    );
 
-   //variables starting with : is from above $data query, below are database column names, table name is activity_chat_message
+//inserting chat message into the database, with the tabl name "activity chat message"
 $query = "
 INSERT INTO activity_chat_message 
 (activity_id, from_user_id, chat_message, status) 
