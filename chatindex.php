@@ -9,8 +9,7 @@
             font-family: Arial, Helvetica, sans-serif;
         }
     </style>
-
-//display the header in the chat index page which contains a list of users that a user can start chat with
+<!--display the header in the chat index page which contains a list of users that a user can start chat with-->
 <body>
 <img src="img/logo.png" alt="Habitracker" height="50">
 
