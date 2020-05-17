@@ -1,3 +1,6 @@
+<!--allow other users to have access to other users' profile when they click into their profile in other webpages-->
+<!-- only partial information about a user is shown in order to protect users' privacy-->
+
 <?php
     require 'header.php';
 ?>
@@ -19,6 +22,7 @@
         exit();
     }
     
+    //fetch other users' information from the database, which includes first name, last name, welcoming message and username only
     require 'db_key.php';
     $conn = connect_db();
     $sql = "Select * from login Where username = '$username'";
