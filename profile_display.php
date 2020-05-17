@@ -1,3 +1,5 @@
+<!--display one's profile when user click the view profile button-->
+
 <?php
     require 'header.php';
 ?>
@@ -11,6 +13,7 @@
 <body>
 
 <?php
+    //security measure to prevent one from accessing users in the system by changing the url
     $username = $_SESSION['username'];
    
     if( !isset( $_SESSION['username']) ){
@@ -19,6 +22,7 @@
         exit();
     }
     
+    //fetch information of the user who logged in the system from the database
     require 'db_key.php';
     $conn = connect_db();
     $sql = "Select * from login Where username = '$username'";
@@ -39,6 +43,8 @@
         ?>
          
         </div>
+        
+        <!-- display users' first name, last name, profile picture and welcoming message in their profile-->
         <div class="main-container">
             <h3><?php echo "Username: ".$row['username']; ?></h3>
             <p><i class="fa fa-envelope info"></i><?php echo "Email: ".$row['email'];?></p>
@@ -70,11 +76,14 @@
             </form>
             <?php
 
+            //display success message after user edit their profile and being redirect back to the display profile page
             if (isset($_GET['profile'])){    //use $_GET to check the url
                 if ($_GET['profile'] == "profileupdated") {
                 echo '<p class="success"> Your profile is updated!</p>';
             }
             }
+            
+            //display error messages according to users invalid actions when uploading their profile picture 
             if (isset($_GET['error'])){  
                 if ($_GET['error'] == "wrongtype") {
                     echo '<p class="wrong">You cannot upload files of this type!</p>';
@@ -86,6 +95,8 @@
                     echo '<p class="wrong">There was an error uploading your file!</p>';
                 }
             }
+            
+            //display success message after user successfully update their proilfe picture 
             if (isset($_GET['upload'])){ 
                 if ($_GET['upload'] == "success"){
                     echo '<p class="success">Your profile picture is uploaded!</p>';
