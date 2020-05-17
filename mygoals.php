@@ -76,7 +76,7 @@
     ?>
     
 <div><h1 align=center>My Goals List</h1></div>
-//create the table if there is results
+<!--create the table if there is results-->
 <?php
     if ($search_result->num_rows >0) {
         ?>
@@ -94,19 +94,19 @@
             <td><strong>Edit this goal</strong></td>
             <td><strong>Delete this goal</strong></td>
         </tr>
-    </head>
+    </thead>
     <tbody>
-//display the information of each goal
+<!--display the information of each goal-->
         <?php while($row = $search_result->fetch_assoc()) { ?>
         <tr>
-        <td><? echo $row['goal_id']; ?></td>
-        <td><? echo $row['goal_name']; ?></td>
-        <td><? echo ($row['goal_description']==''? "-" : $row['goal_description']); ?></td>
-        <td><? echo ($row['goal_subtask']==''? "-" : $row['goal_subtask']); ?></td>
-        <td><? echo $row['goal_enddate']; ?></td>
-        <td><? echo (($row['goal_starttime'] != NULL)? date("H:i", strtotime($row['goal_starttime'])) : '-'); ?></td>
-        <td><? echo (($row['goal_endtime'] != NULL)? date("H:i", strtotime($row['goal_endtime'])) : '-'); ?></td>
-        <td><? echo ($row['goal_public']? "Yes":"No"); ?></td>
+        <td><?php echo $row['goal_id']; ?></td>
+        <td><?php echo $row['goal_name']; ?></td>
+        <td><?php echo ($row['goal_description']==''? "-" : $row['goal_description']); ?></td>
+        <td><?php echo ($row['goal_subtask']==''? "-" : $row['goal_subtask']); ?></td>
+        <td><?php echo $row['goal_enddate']; ?></td>
+        <td><?php echo (($row['goal_starttime'] != NULL)? date("H:i", strtotime($row['goal_starttime'])) : '-'); ?></td>
+        <td><?php echo (($row['goal_endtime'] != NULL)? date("H:i", strtotime($row['goal_endtime'])) : '-'); ?></td>
+        <td><?php echo ($row['goal_public']? "Yes":"No"); ?></td>
         <td><?php echo '<a href="edit_goal.php?goal_id='.$row['goal_id'].'">Edit</a>'; ?></td>
         <td><?php echo '<a href="delete_goal.php?goal_id='.$row['goal_id'].'">Delete</a>'; ?></td>
         </tr>

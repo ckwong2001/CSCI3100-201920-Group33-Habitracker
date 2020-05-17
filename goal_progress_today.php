@@ -97,7 +97,7 @@
 <?php
     if ($search_result->num_rows >0) {
         ?>
-    //create the table if there is result
+    <!--create the table if there is result-->
     <table class="content-table">
         <thead>
             <tr>
@@ -113,7 +113,7 @@
             </tr>
         </thead>
 
-        //display the goal information
+        <!--display the goal information-->
         <tbody>
         <?php while($row = $search_result->fetch_assoc()) { ?>
         <tr>

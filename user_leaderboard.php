@@ -71,8 +71,8 @@
 
 
 <div><h1 align=center>Leaderboard</h1></div>
-//set up the table if there is results
 <?php
+    //set up the table if there is results
     if ($search_result->num_rows >0) {
         $rank = 0;
         $same = 0; //to store number of consecutive users having the same score
@@ -89,8 +89,8 @@
     </thead>
 
     <tbody>
-//display the results user by user
 <?php
+    //display the results user by user
     while($row = $search_result->fetch_assoc()) {
         if (($rank+$same < 10)||($found==0)) {
             //we need more entries to display or we have not found the rank of this user
@@ -110,7 +110,7 @@
                 $found = 1;
             }
     ?>
-//display the details of each of the top 10 users
+<!--display the details of each of the top 10 users-->
 <tr>
 <td><?php echo $rank; ?></td>
 <td><?php echo $row['username']; ?></td>
@@ -128,7 +128,7 @@
 <?php
     }
     ?>
-//display the rank of this user
+<!--display the rank of this user-->
 <div><h1 align=center>My Ranking</h1></div>
 
 <table class="content-table">
