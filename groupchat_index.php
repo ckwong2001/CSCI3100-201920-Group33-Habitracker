@@ -1,5 +1,5 @@
-//display the chat dialog box and corresponding information when users click on the group chat index page
-//functions are included in this page 
+<!--display the chat dialog box and corresponding information when users click on the group chat index page -->
+<!--functions are included in this page -->
 
 <?php
     session_start();
@@ -18,7 +18,7 @@
         }
     </style>
 
-//displaying the header
+<!--displaying the header-->
 
 <body>
 <img src="img/logo.png" alt="Habitracker" height="50">
