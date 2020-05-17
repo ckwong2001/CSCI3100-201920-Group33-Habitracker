@@ -43,10 +43,10 @@
 <div class="form-group">
 //the indication of whether to receive emails
 
-<input type="checkbox" name="receive_dailyreminder" <? echo ($row['receive_dailyreminder']? "checked":""); ?>
+<input type="checkbox" name="receive_dailyreminder" <? echo ($row['receive_dailyreminder']? "checked":""); ?>>
 <label class ="switch" for="receive_dailyreminder">Receive goal reminder daily via email</label><br><br>
 
-<input type="checkbox" name="receive_weeklyreport" <? echo ($row['receive_weeklyreport']? "checked":""); ?>
+<input type="checkbox" name="receive_weeklyreport" <? echo ($row['receive_weeklyreport']? "checked":""); ?>>
 <label for="receive_weeklyreport">Receive weekly report via email</label><br>
 
 <br>
