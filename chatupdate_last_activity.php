@@ -2,6 +2,8 @@
 
 //update_last_activity.php
 
+//update users' last activity when one logged in the habitracker system
+//for showing one's online or offline status in the chat index page 
 include('chatdatabase_connection.php');
 
 session_start();
