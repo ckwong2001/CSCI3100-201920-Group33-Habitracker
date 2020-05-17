@@ -84,12 +84,12 @@
         </style>
     </head>
 <body>
-    //to display the logo
+<!--to display the logo-->
 <img src="img/logo.png" alt="Habitracker" height="50">
 <div class="navbar">
     <a href="index.php">Home</a>
     
-    //to display the dropdown list navigated to different pages
+    <!--to display the dropdown list navigated to different pages-->
     <div class="dropdown">
         <button class="dropbtn">Goals
             <i class="fa fa-caret-down"></i>
@@ -132,7 +132,7 @@
 
 </div>
 
-//authenticate the user
+<!--authenticate the user-->
 <?php
 if (!isset($_SESSION['user_id'])){
     echo '<a href="login.php">Please click here to log in if you have registered an account!</a></br>';

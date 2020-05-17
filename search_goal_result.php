@@ -149,7 +149,7 @@ padding: 12px 15px;
     $order = $_POST['order'];
     ?>
 
-//set up the zone for inputting details of the next searching
+<!--set up the zone for inputting details of the next searching-->
 <div><h1 align=center>Search results</h1></div>
 <div class="search-word">
 <h3>Search by keyword</h3>
@@ -173,7 +173,7 @@ padding: 12px 15px;
 <select name="order" id="order">
 <option selected="selected">Ascending</option>
 <option>Descending</option>
-</select></p></br>
+</select></p><br>
 </form>
 
 <div><h3>Search results</h3></div>
@@ -182,8 +182,8 @@ padding: 12px 15px;
 <div><p>Order: <?php echo $order; ?></p></div>
 </div>
 
-//set up the table if there is results
 <?php
+    //set up the table if there is results
     if ($search_result->num_rows >0) {
         ?>
 <table class="content-table">
@@ -201,7 +201,7 @@ padding: 12px 15px;
 </tr>
 </thead>
 
-//display the details of the goal
+<!--display the details of the goal-->
 <tbody>
 <?php while($row = $search_result->fetch_assoc()) { ?>
 
@@ -216,8 +216,8 @@ padding: 12px 15px;
 <td><?php echo (($row['goal_starttime'] != NULL)? date("H:i", strtotime($row['goal_starttime'])) : '-'); ?></td>
 <td><?php echo (($row['goal_endtime'] != NULL)? date("H:i", strtotime($row['goal_endtime'])) : '-'); ?></td>
 
-//display the button to report goal if the user if not the creator of the goal
 <?php
+    //display the button to report goal if the user if not the creator of the goal
     if ($row['username'] == $_SESSION['username']) {
         echo '<td>-</td>';
     }
