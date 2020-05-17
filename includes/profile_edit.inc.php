@@ -1,8 +1,8 @@
-<?php
+<!--backend code for editing user profile-->
 
+<?php
 session_start();
 $username = $_SESSION['username'];
-//$username = $_SESSION['username'];
 ?>
 
 
@@ -16,6 +16,8 @@ if(!isset($_SESSION['username'])){
     require 'db_key.php';
     $conn = connect_db();
 
+//allocate variables to store the input of users when they edit their profile
+    
 if (isset($_POST["finish-edit-profile-submit"])) {
     $firstName = $_POST["first_name"];
     $lastName = $_POST["last_name"];
@@ -24,15 +26,15 @@ if (isset($_POST["finish-edit-profile-submit"])) {
     $lastName = mysqli_real_escape_string($conn, $lastName);
     $welcomeMessage = mysqli_real_escape_string($conn, $welcomeMessage);
 
+    //update the database on users' personal information
     $sql = "Update login Set first_name = '$firstName',last_name = '$lastName',welcome_message = '$welcomeMessage' where '$username' = username";
     $sql = $conn->query($sql);
     if($sql){
-        //echo "Profile updated. You may <a href=profile_display.php>view your profile</a> now";
+        
+        //redirect users back to the profile display page after editing their profile
         header("Location: ../profile_display.php?profile=profileupdated");
     }
 }
-    
-
 }
         
 ?>
