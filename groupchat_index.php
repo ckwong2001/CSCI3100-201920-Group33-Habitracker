@@ -1,3 +1,6 @@
+//display the chat dialog box and corresponding information when users click on the group chat index page
+//functions are included in this page 
+
 <?php
     session_start();
     include('chatdatabase_connection.php');
@@ -14,6 +17,8 @@
             font-family: Arial, Helvetica, sans-serif;
         }
     </style>
+
+//displaying the header
 
 <body>
 <img src="img/logo.png" alt="Habitracker" height="50">
@@ -96,6 +101,9 @@
 
 
 <script>  
+//running the following functions every 5 seconds for real time chating 
+//chat messages will be automatically updated at every interval 
+    
 $(document).ready(function(){
 
  fetch_activity(); //fetch activity details on webpage 
@@ -107,28 +115,20 @@ $(document).ready(function(){
     //fetch_group_chat_history();
  }, 5000);
 
- function fetch_activity() //fetch_user -> fetch_activity
+ //fetch the activity details that one joined for display 
+ function fetch_activity() 
  {
+   
   $.ajax({
-    url:"groupchat_fetch_user.php", //file name is not wrong here
+    url:"groupchat_fetch_user.php", 
     method:"POST",
     success:function(data){
-    $('#activity_details').html(data); //refer to the div id in html line 65
+    $('#activity_details').html(data); 
    }
   })
  }
 
- function update_last_activity() //no use now
- {
-  $.ajax({
-    url:"chatupdate_last_activity.php",
-    success:function()
-   {
-
-   }
-  })
- }
-
+//create a chat dialog box when one starts chating with users in the same activity
  function make_activity_dialog_box(activity_id, activity_name)
  {
   var modal_content = '<div id="activity_dialog_'+activity_id+'" class="user_dialog" title="You have chat with participants in '+activity_name+'">';
@@ -142,18 +142,20 @@ $(document).ready(function(){
   $('#user_model_details').html(modal_content); //#is from html div tag line 66
  }
  
-
- $(document).on('click', '.start_group_chat', function(){     //start_chat refers to fetch_user.php class btn 
+//create a dialog box when one clicks on the start group chat button
+ $(document).on('click', '.start_group_chat', function(){     
     var activity_id = $(this).data('activityid');       //data- in fetch_user.php
     var activity_name = $(this).data('activityname');   //data- in fetch_user.php
     make_activity_dialog_box(activity_id, activity_name);   //using the upper two lines variable
-    $("#activity_dialog_"+activity_id).dialog({             //refer to line 120 modal content, dialog is a jQuery function
+    $("#activity_dialog_"+activity_id).dialog({            
     autoOpen:false,  //hide dialog on webpage
     width:400
     });
     $('#activity_dialog_'+activity_id).dialog('open'); //pop up chat dialog on webpage
  });
  
+ //display one's chat message and corresponding informatino of the message when one sends a message by clicking the send button 
+ //related information including content of text message, sender and time sent
  $(document).on('click', '.send_chat', function(){ 
   var activity_id = $(this).attr('id'); //activity_id is the POST in groupchat_insert chat.php, id not yet know
   var activity_chat_message = $('#chat_message_'+activity_id).val(); //fetch data from chat area field and store in this variable
@@ -164,12 +166,13 @@ $(document).ready(function(){
    success:function(data)   //success if can retrieve data from server
    {
     $('#chat_message_'+activity_id).val('');   //clear text area value, not sure #chat message refer to what, same with below
-    $('#chat_history_'+activity_id).html(data);   //the html data receive chat data under div
+    $('#chat_history_'+activity_id).html(data);  
    }
   })
  });
 
-function fetch_activity_chat_history(activity_id) //fetch particular user chat history 
+/fetch the chat history of a certain activity
+function fetch_activity_chat_history(activity_id) 
  {
   $.ajax({
    url:"groupchat_fetch_user_chat_history.php",
@@ -183,12 +186,13 @@ function fetch_activity_chat_history(activity_id) //fetch particular user chat h
 
  function update_chat_history_data() //display chat history of every chatbox opened in webpage for each interval
  {
-    $('.chat_history').each(function(){ //access to all html files which have class chat history
+    $('.chat_history').each(function(){ 
     var activity_id = $(this).data('activityid');  //data- in fetch_user.php
     fetch_activity_chat_history(activity_id);
     });
  }
 
+ //hide the activity chat dialog box when one clicks the "cross" button 
  $(document).on('click', '.ui-button-icon', function(){
   $('.user_dialog').dialog('destroy').remove();
  });
