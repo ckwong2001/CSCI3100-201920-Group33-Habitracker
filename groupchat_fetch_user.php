@@ -49,7 +49,7 @@ foreach($result_2 as $row_2){
  //to display one's joined activity in the group chat index page for users to start chat with people in the same activity
  $output .= '
  <tr>
-    <td>'.$row_2['activity_name'].' '.count_activity_unseen_message($row_2['activity_id'], $connect).'</td>
+    <td>'.$row_2['activity_name'].' </td>
    
     <td><button type="button" class="btn btn-info btn-xs start_group_chat" data-activityid="'.$row_2['activity_id'].'" data-activityname="'.$row_2['activity_name'].'">Start Group Chat</button></td>
  </tr>
