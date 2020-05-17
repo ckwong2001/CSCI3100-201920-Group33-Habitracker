@@ -1,3 +1,5 @@
+<!--allow user to enter their email address for receiving an email which directs them to reset their password when they forget their password-->
+
 <html>
     <head>
     <link rel="stylesheet" href="reset-password.css">
@@ -27,6 +29,7 @@
         <div class="bubble"></div>
     </div>
 
+ <!-- display a form for user to enter their email address and submit to the backend application-->
 <img src="img/logo.png" alt="Habitracker" height="50">
 <div class="loginbox">
         <h1>Reset your password</h1>
@@ -36,6 +39,8 @@
             <button type="submit" name="reset-request-submit">Receive new password by e-mail</button>
         </form>
         <?php
+    
+    //display success message to notify the users to check their email account for the email sent by the system
             if (isset($_GET["reset"])){
                 If ($_GET["reset"] == "success"){
                     echo '<p>Please check your e-mail.</p>';
