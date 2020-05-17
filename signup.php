@@ -1,3 +1,4 @@
+《!--for users to sign up if they do not have an account previously-->
 <html>
     <head>
     <link rel="stylesheet" href="signup_style.css">
@@ -28,11 +29,13 @@
     </div>
 
 <main>
+   
 <img src="img/logo.png" alt="Habitracker" height="50">
 <div class="loginbox">
     <h1>Signup Here</h1>
     <div class="errormessage">
     <?php
+        //display error messages corresponding to the invalid input by the users 
             if (isset($_GET['error'])){    //use $_GET to check the url
                 if ($_GET['error'] == "emptyfields") {
                     echo '<p> Fill in all fields!</p>';
@@ -53,6 +56,7 @@
                     echo '<p> Username is already taken!</p>';
                 }
             }
+        //display success message after user has successfully registered one's account
             else if (isset($_GET['signup'])) {
                 if ($_GET['signup'] == "success") {
                 echo '<p class="signup_success"> Signup successful</p>';
@@ -61,6 +65,7 @@
             }
         ?>
         </div>
+    <!--display the signup form for users to sign up and pass their input to the backend appplication-->
         <form action="includes/signup.inc.php" method="post">
             <p>Username</p> 
             <input type="text" name="uid" placeholder="Enter Username">
