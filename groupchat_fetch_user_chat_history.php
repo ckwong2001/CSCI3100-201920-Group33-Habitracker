@@ -1,6 +1,5 @@
-//fetch the group chat history of a certain activity when a user open the group chat dialog box
-
 <?php
+//fetch the group chat history of a certain activity when a user open the group chat dialogue box
 
 //fetch_user_chat_history.php
 
