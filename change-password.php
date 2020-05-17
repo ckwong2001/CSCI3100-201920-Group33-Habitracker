@@ -14,6 +14,7 @@
 <body>
     
 <?php
+    //prevent one from access the page if one has not logged in
     if( !isset( $_SESSION['username']) ){
         echo "You are not authorized to view this page. Go back <a href= '/'>home</a>";
         exit();
@@ -31,7 +32,8 @@
             <button type="submit" name="change-password-submit">Save Changes</button>
 
             </form>
-    
+        
+    //printing error messages according to the invalid input of the users
     <?php
         if (isset($_GET['changepwd'])){    //use $_GET to check the url
             if ($_GET['changepwd'] == "empty") {
@@ -46,6 +48,7 @@
                 echo '</br>';
                 echo '<p class="wrong">You input the wrong current password</p>';
             }
+            //print success message to notify the user that one's password is updated 
             else if ($_GET['changepwd'] == "passwordupdated") {
                 echo '</br>';
                 echo '<p class="success">Your password is updated</p>';
