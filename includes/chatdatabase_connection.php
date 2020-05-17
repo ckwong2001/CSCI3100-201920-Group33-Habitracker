@@ -1,3 +1,5 @@
+//connect the private chat application with the database 
+
 <?php
 
 //database_connection.php
