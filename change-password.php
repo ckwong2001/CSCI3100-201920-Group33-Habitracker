@@ -1,3 +1,5 @@
+//when users attempt to change their password by clicking the button in their account management tab
+
 <?php
     require "header.php";
 ?>
