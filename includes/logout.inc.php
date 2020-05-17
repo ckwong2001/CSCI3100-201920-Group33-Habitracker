@@ -1,3 +1,5 @@
+<!--update the database on users' activity after one has logged out-->
+
 <?php
     include('chatdatabase_connection.php');
 session_start();
@@ -7,4 +9,6 @@ session_start();
     $statement->execute();
 session_unset();
 session_destroy();
+
+//redirect the user back to the login page after one has logged out
 header("Location: ../login.php?status=logout");
