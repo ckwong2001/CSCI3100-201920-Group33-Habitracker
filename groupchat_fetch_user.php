@@ -1,12 +1,15 @@
+//retrieve the activity that a user joined and corresponding activity name when user enter the group chat index page 
+
 <?php
 
-//fetch_user.php this is for displaying button "start chat" so it excludes the current user 
+//fetch_user.php 
+//this is for displaying button "start chat" so it excludes the current user 
 
 include('chatdatabase_connection.php');
 
 session_start();
 
-/* this is where we should select activity from activity from database which the user has joint */
+//select activity from database which the user has joint */
 $query = "
 SELECT * FROM activity_users_list 
 WHERE user_id = '".$_SESSION['user_id']."' 
@@ -27,23 +30,8 @@ $output = '
  </tr>
 ';
 
-foreach($result as $row)
-{
-    /* this can ignore for now
- $status = '';
- $current_timestamp = strtotime(date("Y-m-d H:i:s") . '- 10 second');
- $current_timestamp = date('Y-m-d H:i:s', $current_timestamp);
- $user_last_activity = fetch_user_last_activity($row['user_id'], $connect);
- if($user_last_activity > $current_timestamp)
- {
-  $status = '<span class="label label-success">Online</span>';
- }
- else
- {
-  $status = '<span class="label label-danger">Offline</span>';
- }
- */
-
+//to display the other information of the activity, other than the activity id, from another table in the database 
+//for displaying such information in the chat index page, such as the activity name
 $query = "
 SELECT * FROM activity_table 
 WHERE activity_id = '".$row['activity_id']."' 
@@ -57,6 +45,7 @@ $result_2 = $statement->fetchAll();
 
 foreach($result_2 as $row_2){
 
+ //to display one's joined activity in the group chat index page for users to start chat with people in the same activity
  $output .= '
  <tr>
     <td>'.$row_2['activity_name'].' '.count_activity_unseen_message($row_2['activity_id'], $connect).'</td>
@@ -67,7 +56,6 @@ foreach($result_2 as $row_2){
 
 }
 }
-//the activity_id and activity_name not yet defined, data- name changed 
 
 $output .= '</table>';
 
