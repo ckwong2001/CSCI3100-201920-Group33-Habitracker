@@ -1,6 +1,5 @@
-//retrieve the activity that a user joined and corresponding activity name when user enter the group chat index page 
-
 <?php
+//retrieve the activity that a user joined and corresponding activity name when user enter the group chat index page 
 
 //fetch_user.php 
 //this is for displaying button "start chat" so it excludes the current user 
@@ -30,6 +29,8 @@ $output = '
  </tr>
 ';
 
+foreach($result as $row)
+{
 //to display the other information of the activity, other than the activity id, from another table in the database 
 //for displaying such information in the chat index page, such as the activity name
 $query = "
